@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A responsive dermatology clinic website concept with an accessible appointment request experience.">
+  <meta name="theme-color" content="#075b4d">
+  <title>Your Skin Clinic | Dermatology &amp; Skin Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#13201d; --muted:#5c6862; --paper:#fcfdf9; --soft:#f1f5f0; --jade:#08705e; --jade-dark:#075244; --jade-pale:#dcece4; --clay:#bb6949; --line:#d9e1da; --white:#fff; --radius:18px; --shadow:0 22px 55px -30px rgba(9,48,39,.4); }
+    * { box-sizing:border-box; margin:0; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--paper); color:var(--ink); font:400 16px/1.55 "DM Sans",sans-serif; -webkit-font-smoothing:antialiased; }
+    body.no-scroll { overflow:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button,input,select,textarea { font:inherit; }
+    button { cursor:pointer; }
+    img,svg { display:block; max-width:100%; }
+    :focus-visible { outline:3px solid #e19d60; outline-offset:3px; }
+    .skip-link { position:absolute; left:1rem; top:-5rem; z-index:100; padding:.7rem 1rem; border-radius:8px; background:var(--ink); color:#fff; }
+    .skip-link:focus { top:1rem; }
+    .wrap { width:min(1160px, calc(100% - 3rem)); margin-inline:auto; }
+    .eyebrow { color:var(--jade-dark); font:500 .72rem/1 "DM Mono",monospace; letter-spacing:.13em; text-transform:uppercase; }
+    h1,h2,h3 { font-family:Fraunces,Georgia,serif; font-weight:500; letter-spacing:-.035em; line-height:1.08; }
+    h1 { font-size:clamp(3rem,6.2vw,5.35rem); max-width:11ch; }
+    h2 { font-size:clamp(2.25rem,4vw,3.6rem); }
+    h3 { font-size:1.32rem; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:.6rem; min-height:48px; padding:.75rem 1.2rem; border:1px solid transparent; border-radius:999px; font-weight:700; font-size:.91rem; transition:transform .2s,background .2s,border-color .2s; }
+    .button:hover { transform:translateY(-2px); }
+    .button--primary { background:var(--jade); color:#fff; box-shadow:0 8px 22px -14px var(--jade-dark); }
+    .button--primary:hover { background:var(--jade-dark); }
+    .button--outline { border-color:var(--line); background:rgba(255,255,255,.45); }
+    .button--outline:hover { border-color:var(--jade); color:var(--jade-dark); }
+    .section { padding:7.25rem 0; }
+    .section-heading { display:grid; grid-template-columns:1fr minmax(220px,460px); gap:2rem; align-items:end; margin-bottom:3.3rem; }
+    .section-heading p:last-child { color:var(--muted); }
+    .section-heading h2 { margin-top:.75rem; }
+
+    .site-header { position:sticky; top:0; z-index:20; background:rgba(252,253,249,.87); border-bottom:1px solid transparent; backdrop-filter:blur(14px); transition:border-color .2s,box-shadow .2s; }
+    .site-header.scrolled { border-color:var(--line); box-shadow:0 8px 26px -24px var(--ink); }
+    .nav { height:76px; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; }
+    .brand { display:flex; align-items:center; gap:.65rem; font-family:Fraunces,serif; font-size:1.26rem; font-weight:600; letter-spacing:-.04em; white-space:nowrap; }
+    .brand-mark { display:grid; width:28px; height:28px; place-items:center; border-radius:50% 50% 50% 7px; background:var(--jade); color:#fff; font:500 .75rem "DM Mono",monospace; transform:rotate(-35deg); }
+    .brand-mark span { transform:rotate(35deg); }
+    .nav-links { display:flex; align-items:center; gap:1.85rem; list-style:none; color:#42504a; font-size:.9rem; }
+    .nav-links a { position:relative; }
+    .nav-links a::after { content:""; position:absolute; left:0; bottom:-.45rem; width:100%; height:1.5px; background:var(--jade); transform:scaleX(0); transform-origin:left; transition:transform .2s; }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-contact { color:var(--muted); font:.76rem "DM Mono",monospace; }
+    .menu-toggle { display:none; border:0; background:none; width:44px; height:44px; padding:10px; }
+    .menu-toggle span { display:block; height:2px; margin:5px 0; background:var(--ink); transition:transform .2s,opacity .2s; }
+
+    .hero { overflow:hidden; padding:5.8rem 0 4.7rem; background:radial-gradient(circle at 85% 20%,#e3f0e8 0,transparent 26rem); }
+    .hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:3.5rem; align-items:center; }
+    .hero .eyebrow { margin-bottom:1.35rem; }
+    .hero-copy > p:not(.eyebrow) { max-width:51ch; margin:1.5rem 0 2rem; color:var(--muted); font-size:1.08rem; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+    .hero-note { display:flex; align-items:center; gap:.55rem; margin-top:1.4rem; color:var(--muted); font-size:.82rem; }
+    .live-dot { width:.55rem; height:.55rem; border-radius:99px; background:#55a78a; box-shadow:0 0 0 4px #d7ede2; }
+    .art-card { position:relative; isolation:isolate; min-height:465px; padding:1.5rem; overflow:hidden; border:1px solid var(--line); border-radius:var(--radius); background:linear-gradient(145deg,#e8f3ec,#d5e7db); box-shadow:var(--shadow); }
+    .art-card::before { content:""; position:absolute; z-index:-1; right:-12%; bottom:-20%; width:75%; aspect-ratio:1; border:1px solid rgba(7,82,68,.16); border-radius:50%; box-shadow:0 0 0 38px rgba(255,255,255,.12),0 0 0 76px rgba(255,255,255,.09); }
+    .art-label { position:absolute; top:1.4rem; left:1.4rem; padding:.45rem .65rem; border:1px solid rgba(7,82,68,.18); border-radius:999px; background:rgba(252,253,249,.7); color:var(--jade-dark); font:.67rem "DM Mono",monospace; letter-spacing:.08em; }
+    .face-art { position:absolute; inset:3.2rem 2rem 1.25rem; width:calc(100% - 4rem); height:calc(100% - 4.45rem); }
+    .art-caption { position:absolute; right:1.35rem; bottom:1.25rem; max-width:174px; padding:.8rem .9rem; border-radius:10px; background:rgba(19,32,29,.92); color:#e7eee9; font-size:.75rem; line-height:1.45; }
+
+    .proof { border-block:1px solid var(--line); background:var(--soft); }
+    .proof-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+    .proof-item { padding:1.45rem 1.7rem; border-left:1px solid var(--line); }
+    .proof-item:first-child { border-left:0; }
+    .proof-value { color:var(--jade-dark); font:500 1.85rem/1 Fraunces,serif; }
+    .proof-label { margin-top:.35rem; color:var(--muted); font:.65rem "DM Mono",monospace; letter-spacing:.085em; text-transform:uppercase; }
+
+    .services { background:#fff; }
+    .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .service-card { min-height:220px; padding:1.6rem; border:1px solid var(--line); border-radius:14px; background:var(--paper); transition:transform .2s,box-shadow .2s,border-color .2s; }
+    .service-card:hover { border-color:#a6c7b8; box-shadow:var(--shadow); transform:translateY(-4px); }
+    .service-icon { display:grid; width:42px; height:42px; place-items:center; margin-bottom:1.5rem; border-radius:11px; background:var(--jade-pale); color:var(--jade-dark); }
+    .service-card p { margin-top:.6rem; color:var(--muted); font-size:.91rem; }
+
+    .process { background:var(--jade-dark); color:#eef7f1; }
+    .process .eyebrow { color:#a9d8c6; }
+    .process h2 { color:#fff; }
+    .process .section-heading p:last-child { color:#bed8cc; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+    .step { position:relative; padding:1.3rem 1.2rem 0 0; }
+    .step:not(:last-child)::after { content:""; position:absolute; top:1.9rem; right:0; width:1px; height:calc(100% - 1.9rem); background:rgba(255,255,255,.2); }
+    .step-number { color:#a9d8c6; font:.72rem "DM Mono",monospace; letter-spacing:.08em; }
+    .step h3 { margin:.85rem 0 .6rem; color:#fff; }
+    .step p { color:#c9dfd4; font-size:.9rem; }
+
+    .doctor-grid { display:grid; grid-template-columns:.76fr 1.24fr; gap:4.4rem; align-items:center; }
+    .doctor-image { position:relative; min-height:410px; overflow:hidden; border-radius:var(--radius); background:linear-gradient(155deg,#daeae0,#c2ddd0); }
+    .doctor-image svg { position:absolute; inset:0; width:100%; height:100%; }
+    .doctor-image small { position:absolute; left:1.2rem; bottom:1.2rem; padding:.45rem .65rem; border-radius:999px; background:#fff; color:var(--jade-dark); font:.68rem "DM Mono",monospace; }
+    .doctor-copy h2 { margin:.7rem 0 1.2rem; }
+    .doctor-copy > p:not(.eyebrow) { max-width:55ch; color:var(--muted); }
+    .credentials { margin-top:1.6rem; list-style:none; border-top:1px solid var(--line); }
+    .credentials li { display:flex; justify-content:space-between; gap:1rem; padding:.78rem 0; border-bottom:1px solid var(--line); font-size:.89rem; }
+    .credentials span { color:var(--muted); text-align:right; }
+
+    .reviews { background:var(--soft); }
+    .review-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .review { display:flex; flex-direction:column; min-height:230px; padding:1.6rem; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .stars { color:var(--clay); letter-spacing:.12em; font-size:.86rem; }
+    .review blockquote { margin:1.1rem 0 auto; color:#3e4b45; font-size:.98rem; }
+    .review cite { margin-top:1.3rem; color:var(--jade-dark); font:.71rem "DM Mono",monospace; font-style:normal; }
+
+    .booking { padding:6.5rem 0; }
+    .booking-panel { display:grid; grid-template-columns:1fr .9fr; gap:3.5rem; padding:clamp(1.7rem,5vw,4rem); border-radius:var(--radius); background:var(--ink); color:#fff; }
+    .booking-panel h2 { margin:.75rem 0 1rem; color:#fff; }
+    .booking-panel .eyebrow { color:#9ed4be; }
+    .booking-copy > p:not(.eyebrow) { max-width:42ch; color:#c3d0ca; }
+    .contact-detail { display:flex; gap:.75rem; align-items:center; margin-top:2rem; color:#dce8e1; font-size:.88rem; }
+    .contact-detail span { display:grid; width:34px; height:34px; place-items:center; border-radius:50%; background:rgba(255,255,255,.1); }
+    .form { display:grid; gap:.85rem; padding:1.4rem; border-radius:14px; background:#fff; color:var(--ink); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+    label { display:grid; gap:.35rem; color:#43514b; font-size:.75rem; font-weight:700; }
+    input,select,textarea { width:100%; padding:.7rem .75rem; border:1px solid #ced9d1; border-radius:8px; color:var(--ink); background:#fff; font-size:.9rem; }
+    input:focus,select:focus,textarea:focus { border-color:var(--jade); outline:2px solid #d7ece2; }
+    textarea { min-height:76px; resize:vertical; }
+    .form .button { margin-top:.25rem; }
+    .form-note { color:var(--muted); font-size:.67rem; text-align:center; }
+    .success { display:none; padding:.8rem; border-radius:8px; background:#e4f2ea; color:var(--jade-dark); font-size:.82rem; }
+    .success.visible { display:block; }
+
+    .footer { padding:3.8rem 0 1.8rem; border-top:1px solid var(--line); }
+    .footer-grid { display:grid; grid-template-columns:1.5fr repeat(3,1fr); gap:2rem; }
+    .footer-copy { max-width:30ch; margin-top:.85rem; color:var(--muted); font-size:.87rem; }
+    .footer h3 { margin-bottom:.85rem; font:500 .7rem "DM Mono",monospace; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+    .footer ul { padding:0; list-style:none; }
+    .footer li { margin:.5rem 0; color:#45524c; font-size:.88rem; }
+    .footer li a:hover { color:var(--jade-dark); }
+    .footer-bottom { display:flex; justify-content:space-between; gap:1rem; margin-top:3rem; padding-top:1.3rem; border-top:1px solid var(--line); color:var(--muted); font:.68rem "DM Mono",monospace; }
+
+    @media (max-width:850px) { .nav-links,.nav-contact { display:none; } .menu-toggle { display:block; } .nav-open .nav-links { position:absolute; top:76px; left:0; right:0; display:grid; gap:0; padding:.6rem 1.5rem 1.25rem; border-bottom:1px solid var(--line); background:var(--paper); } .nav-open .nav-links li { border-bottom:1px solid var(--line); } .nav-open .nav-links a { display:block; padding:.8rem 0; } .nav-open .nav-links a::after { display:none; } .hero-grid,.doctor-grid,.booking-panel { grid-template-columns:1fr; } .hero-copy { order:2; } .art-card { max-width:560px; width:100%; margin:auto; min-height:380px; } .section-heading { grid-template-columns:1fr; gap:1rem; } .doctor-image { max-width:500px; width:100%; min-height:350px; } .booking-panel { gap:2rem; } }
+    @media (max-width:620px) { .wrap { width:min(100% - 2rem,1160px); } .section { padding:4.8rem 0; } .hero { padding:3.8rem 0; } .hero-actions .button { width:100%; } .proof-grid,.service-grid,.review-grid { grid-template-columns:1fr; } .proof-item,.proof-item:first-child { border-left:0; border-bottom:1px solid var(--line); } .proof-item:last-child { border-bottom:0; } .steps { grid-template-columns:1fr; gap:1.8rem; } .step:not(:last-child)::after { top:auto; bottom:-1rem; right:auto; left:0; width:48px; height:1px; } .form-row,.footer-grid { grid-template-columns:1fr; } .footer-bottom { flex-direction:column; } .art-card { min-height:330px; } .face-art { inset:3rem 1rem 1rem; width:calc(100% - 2rem); height:calc(100% - 4rem); } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.001ms!important; animation-duration:.001ms!important; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Meenakshi Skin Clinic home"><span class="brand-mark"><span>M</span></span>Meenakshi Skin</a>
+      <ul class="nav-links" id="nav-links"><li><a href="#services">Treatments</a></li><li><a href="#approach">Our approach</a></li><li><a href="#doctor">Doctor</a></li><li><a href="#reviews">Reviews</a></li></ul>
+      <span class="nav-contact">+91 00000 00000</span>
+      <a class="button button--primary" href="#book">Book a visit <span aria-hidden="true">→</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy"><p class="eyebrow">Dermatology &amp; skin health</p><h1>Care that looks beneath the surface.</h1><p>Thoughtful, dermatologist-led care for acne, pigmentation, hair and skin ageing—built around a diagnosis, not a one-size-fits-all menu.</p><div class="hero-actions"><a class="button button--primary" href="#book">Book a consultation <span aria-hidden="true">→</span></a><a class="button button--outline" href="#services">Explore treatments</a></div><p class="hero-note"><span class="live-dot" aria-hidden="true"></span> A clinician reviews every first consultation</p></div>
+        <div class="art-card" aria-label="Abstract dermatology illustration"><span class="art-label">Skin, understood</span><svg class="face-art" viewBox="0 0 460 440" fill="none" aria-hidden="true"><path d="M153 68c-16 45-19 92-10 137 8 42 32 87 78 109 30 14 62 11 86-13 22-22 27-54 22-85-3-19 4-33 20-48 18-17 23-43 13-65-11-24-34-40-60-42-16-1-29 3-45 2-44-4-72-8-104 6Z" fill="#F7F3E9" stroke="#075244" stroke-width="2"/><path d="M171 93c28-19 61-21 88-5M255 134c8-3 18-3 25 1M191 142c10-6 22-7 31-1M203 223c22 10 49 9 68-5" stroke="#075244" stroke-width="2" stroke-linecap="round"/><path d="M144 177c-35 20-58 55-60 96M312 256c42 3 80 28 101 65M177 303c-3 35-17 63-44 91M252 298c20 38 48 66 89 86" stroke="#BB6949" stroke-width="1.5" stroke-linecap="round" opacity=".75"/><circle cx="360" cy="82" r="44" stroke="#08705E" stroke-width="1.5" stroke-dasharray="4 8"/><circle cx="75" cy="284" r="28" fill="#08705E" fill-opacity=".12"/><path d="M345 174h68M345 192h45M39 119h71" stroke="#075244" stroke-width="1.5"/><text x="347" y="166" fill="#075244" font-family="DM Mono, monospace" font-size="10">YOUR SKIN</text><text x="40" y="110" fill="#075244" font-family="DM Mono, monospace" font-size="10">YOUR STORY</text></svg><p class="art-caption">Individual skin deserves an individual plan.</p></div>
+      </div>
+    </section>
+    <section class="proof" aria-label="Clinic highlights"><div class="wrap proof-grid"><div class="proof-item"><p class="proof-value">14 yrs</p><p class="proof-label">Clinical experience</p></div><div class="proof-item"><p class="proof-value">30+</p><p class="proof-label">Treatment options</p></div><div class="proof-item"><p class="proof-value">9k+</p><p class="proof-label">Patients supported</p></div><div class="proof-item"><p class="proof-value">MD</p><p class="proof-label">Dermatology-led care</p></div></div></section>
+    <section class="section services" id="services"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">Treatments</p><h2>Considered care for every concern.</h2></div><p>Each plan begins with a proper consultation, so recommendations are guided by your skin, your goals and your routine.</p></div><div class="service-grid">
+      <article class="service-card"><span class="service-icon">✦</span><h3>Acne &amp; scars</h3><p>Clear, practical care for breakouts, marks and the factors that keep them returning.</p></article><article class="service-card"><span class="service-icon">◌</span><h3>Pigmentation</h3><p>Targeted support for melasma, uneven tone, sun damage and post-acne marks.</p></article><article class="service-card"><span class="service-icon">⌁</span><h3>Skin ageing</h3><p>Evidence-led options for texture, fine lines, laxity and healthy-looking skin.</p></article><article class="service-card"><span class="service-icon">⌇</span><h3>Laser treatments</h3><p>Suitability assessed carefully for hair reduction, texture and pigment concerns.</p></article><article class="service-card"><span class="service-icon">◒</span><h3>Medical facials</h3><p>Peels, microneedling and skin-maintenance treatments planned with purpose.</p></article><article class="service-card"><span class="service-icon">〰</span><h3>Hair &amp; scalp</h3><p>Hair-loss and scalp-care plans that begin by identifying the likely cause.</p></article>
+    </div></div></section>
+    <section class="section process" id="approach"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">The consultation</p><h2>Clear steps. No detours.</h2></div><p>We listen carefully, assess thoughtfully and adapt treatment as your skin responds.</p></div><div class="steps"><article class="step"><p class="step-number">01 / CONSULT</p><h3>Listen first</h3><p>Your goals, routine and history give the consultation its starting point.</p></article><article class="step"><p class="step-number">02 / ASSESS</p><h3>See the full picture</h3><p>A clinical assessment helps separate surface symptoms from underlying triggers.</p></article><article class="step"><p class="step-number">03 / PLAN</p><h3>Choose with care</h3><p>You receive a clear plan with expectations, alternatives and next steps.</p></article><article class="step"><p class="step-number">04 / REVIEW</p><h3>Adjust as needed</h3><p>Progress is checked at planned intervals, because skin changes over time.</p></article></div></div></section>
+    <section class="section" id="doctor"><div class="wrap doctor-grid"><div class="doctor-image" aria-label="Placeholder portrait area for the lead dermatologist"><svg viewBox="0 0 380 430" fill="none" aria-hidden="true"><circle cx="190" cy="146" r="66" fill="#F7F3E9" stroke="#075244" stroke-width="2"/><path d="M63 420c6-119 61-178 127-178 65 0 120 59 127 178" fill="#F7F3E9" stroke="#075244" stroke-width="2"/><path d="M145 141c11 7 25 10 45 10 21 0 36-3 47-10M158 184c18 12 44 12 64 0" stroke="#075244" stroke-width="2" stroke-linecap="round"/><path d="M80 390c53-20 166-20 220 0" stroke="#BB6949" stroke-width="2"/></svg><small>Replace with a professional photo</small></div><div class="doctor-copy"><p class="eyebrow">Meet your dermatologist</p><h2>Dr. [Full Name], MD Dermatology</h2><p>Use this space to introduce the doctor, clinical philosophy and the kind of care patients can expect. A real portrait and verified credentials will make the page ready for a live clinic.</p><ul class="credentials"><li><strong>Qualification</strong><span>MD Dermatology, [University]</span></li><li><strong>Experience</strong><span>14 years in clinical practice</span></li><li><strong>Focus areas</strong><span>Acne · Pigment · Laser</span></li><li><strong>Membership</strong><span>[Association name]</span></li></ul></div></div></section>
+    <section class="section reviews" id="reviews"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">Patient experience</p><h2>Care that feels considered.</h2></div><p>Sample testimonials below are placeholders—replace them with consented, verified reviews before publishing.</p></div><div class="review-grid"><figure class="review"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“I finally understood what was causing the breakouts—and why my old routine was not helping.”</blockquote><figcaption><cite>R. K. · Sample testimonial</cite></figcaption></figure><figure class="review"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“The plan was clear and realistic. Each follow-up felt like a genuine review, not a repeat appointment.”</blockquote><figcaption><cite>S. M. · Sample testimonial</cite></figcaption></figure><figure class="review"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“They were direct about what would suit my skin tone before suggesting any treatment.”</blockquote><figcaption><cite>A. P. · Sample testimonial</cite></figcaption></figure></div></div></section>
+    <section class="booking" id="book"><div class="wrap booking-panel"><div class="booking-copy"><p class="eyebrow">Start with a consultation</p><h2>Let’s make a plan for your skin.</h2><p>This portfolio demo uses a front-end-only appointment form. Connect it to your preferred email, calendar or back-end service before using it for real enquiries.</p><p class="contact-detail"><span aria-hidden="true">☎</span> +91 00000 00000<br>Mon–Sat, 10:00–19:00</p></div><form class="form" id="appointment-form"><div class="form-row"><label>Your name<input name="name" autocomplete="name" required placeholder="e.g. Asha Sharma"></label><label>Phone number<input name="phone" type="tel" autocomplete="tel" required placeholder="+91 00000 00000"></label></div><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label>What would you like help with?<select name="concern" required><option value="">Choose a concern</option><option>Acne &amp; acne marks</option><option>Pigmentation &amp; tone</option><option>Hair &amp; scalp</option><option>Laser treatment</option><option>General consultation</option></select></label><label>Anything you would like us to know? <textarea name="notes" placeholder="Optional"></textarea></label><button class="button button--primary" type="submit">Request an appointment <span aria-hidden="true">→</span></button><p class="success" id="form-success" role="status">Thanks—your appointment request has been captured in this demo.</p><p class="form-note">Demo only. No information is sent or stored.</p></form></div></section>
+  </main>
+  <footer class="footer"><div class="wrap"><div class="footer-grid"><div><a class="brand" href="#top"><span class="brand-mark"><span>M</span></span>Meenakshi Skin</a><p class="footer-copy">A calm, diagnosis-led dermatology website concept built for a thoughtful clinic experience.</p></div><div><h3>Explore</h3><ul><li><a href="#services">Treatments</a></li><li><a href="#approach">Our approach</a></li><li><a href="#doctor">Doctor</a></li></ul></div><div><h3>Contact</h3><ul><li><a href="tel:+910000000000">+91 00000 00000</a></li><li><a href="mailto:hello@example.com">hello@example.com</a></li></ul></div><div><h3>Visit</h3><ul><li>[Clinic address]</li><li>Mon–Sat, 10:00–19:00</li></ul></div></div><div class="footer-bottom"><span>© <span id="year"></span> Meenakshi Skin Clinic</span><span>Portfolio concept · Replace placeholder details before publishing</span></div></div></footer>
+  <script>
+    const header = document.getElementById('site-header'); const toggle = document.getElementById('menu-toggle'); const nav = document.querySelector('.nav');
+    const setHeader = () => header.classList.toggle('scrolled', window.scrollY > 8); setHeader(); window.addEventListener('scroll', setHeader, {passive:true});
+    toggle.addEventListener('click', () => { const open = nav.classList.toggle('nav-open'); toggle.setAttribute('aria-expanded', open); toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation'); });
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => { nav.classList.remove('nav-open'); toggle.setAttribute('aria-expanded','false'); }));
+    document.getElementById('appointment-form').addEventListener('submit', event => { event.preventDefault(); const success = document.getElementById('form-success'); success.classList.add('visible'); event.currentTarget.reset(); success.focus(); });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
